@@ -6,8 +6,14 @@ module.exports = {
   head: {
     title: process.env.npm_package_name || '',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content:
+          'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'
+      },
       {
         hid: 'description',
         name: 'description',
@@ -30,7 +36,15 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    {
+      src: '~/plugins/vant.js'
+    },
+    {
+      src: '~/plugins/lib-flexible.js',
+      mode: 'client'
+    }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -61,6 +75,17 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {},
+    postcss: {
+      plugins: {
+        'postcss-pxtorem': {
+          rootValue: 37.5,
+          propList: ['*']
+        }
+      },
+      preset: {
+        autoprefixer: true
+      }
+    }
   }
 }

@@ -5,25 +5,11 @@
       <h1 class="title">
         blog-nuxt-m
       </h1>
-      <h2 class="subtitle">
-        My first-rate Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <van-button type="default">默认按钮</van-button>
+      <van-button type="primary">主要按钮</van-button>
+      <van-button type="info">信息按钮</van-button>
+      <van-button type="warning">警告按钮</van-button>
+      <van-button type="danger">危险按钮</van-button>
     </div>
   </div>
 </template>
