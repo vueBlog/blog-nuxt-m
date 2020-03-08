@@ -2,7 +2,7 @@
   <div class="content">
     <form action="/">
       <van-search
-        v-model="value"
+        v-model="search"
         show-action
         placeholder="请输入搜索关键词"
         @search="onSearch"
@@ -30,7 +30,7 @@ export default {
   name: 'Search',
   data() {
     return {
-      value: '',
+      search: '',
       toastLoading: '',
       searchList: []
     }

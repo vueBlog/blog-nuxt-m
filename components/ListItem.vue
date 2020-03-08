@@ -1,6 +1,6 @@
 <template>
   <router-link :to="`/detail/${info.articleId}`" class="list-item">
-    <h2 class="item-title van-ellipsis">{{ info.articleTitle }}</h2>
+    <h2 class="item-title theme-color van-ellipsis">{{ info.articleTitle }}</h2>
     <div class="item-desc van-multi-ellipsis--l3">
       {{ info.articleSubTitle }}
     </div>
@@ -49,7 +49,7 @@ export default {
     line-height: 24px;
   }
   .item-desc {
-    padding: 5px 0;
+    margin: 5px 0;
     font-size: 14px;
     line-height: 20px;
   }
