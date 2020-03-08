@@ -1,10 +1,11 @@
+require('dotenv').config()
 module.exports = {
   mode: 'universal',
   /*
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: process.env.VUE_APP_title || '',
     meta: [
       {
         charset: 'utf-8'
@@ -15,9 +16,19 @@ module.exports = {
           'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'
       },
       {
+        hid: 'keywords',
+        name: 'keywords',
+        content: process.env.VUE_APP_keywords || ''
+      },
+      {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: process.env.VUE_APP_description || ''
+      },
+      {
+        hid: 'author',
+        name: 'author',
+        content: process.env.VUE_APP_author || ''
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
@@ -32,11 +43,14 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/common.scss'],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
+    {
+      src: '~/plugins/axios.js'
+    },
     {
       src: '~/plugins/vant.js'
     },
@@ -67,7 +81,17 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: process.env.VUE_APP_host,
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      target: process.env.VUE_APP_host,
+      ws: true,
+      changeOrigin: true
+    }
+  },
   /*
    ** Build configuration
    */
@@ -85,6 +109,15 @@ module.exports = {
       },
       preset: {
         autoprefixer: true
+      }
+    }
+  },
+  router: {
+    base: '/blogNuxtM/',
+    scrollBehavior(to, from, savedPosition) {
+      return {
+        x: 0,
+        y: 0
       }
     }
   }
