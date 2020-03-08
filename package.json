@@ -30,6 +30,7 @@
     "cross-env": "^5.2.0",
     "dayjs": "^1.8.21",
     "express": "^4.16.4",
+    "github-markdown-css": "^4.0.0",
     "nuxt": "^2.0.0",
     "vant": "^2.5.3"
   },

@@ -11,7 +11,7 @@
           <img class="logo" src="~assets/images/logo.jpg" alt="logo" />
         </template>
         <template v-else>
-          <van-icon name="arrow-left" style="font-size: 1.4em;" />
+          <van-icon name="arrow-left" style="font-size: 16px;" />
           <span>返回</span>
         </template>
       </div>
@@ -74,7 +74,7 @@ export default {
       let active = 0
       for (let index = 0, len = this.tabbar.length; index < len; index++) {
         const element = this.tabbar[index]
-        if (element.to === this.$route.path) {
+        if (element.name === this.$route.name) {
           active = index
           break
         }
@@ -86,6 +86,28 @@ export default {
     },
     title() {
       return `${this.tabbar[this.active].label}--${process.env.VUE_APP_title}`
+    }
+  },
+  watch: {
+    $route: {
+      handler(val, oldVal) {
+        if (val.name === 'detail-id') {
+          this.tabbar.push({
+            name: 'detail-id',
+            icon: 'label-o',
+            selectedIcon: 'label',
+            to: val.path,
+            label: '详情'
+          })
+        } else {
+          // eslint-disable-next-line no-lonely-if
+          if (this.tabbar.length === 5) {
+            this.tabbar.splice(4, 1)
+          }
+        }
+      },
+      deep: true,
+      immediate: true
     }
   },
   methods: {
