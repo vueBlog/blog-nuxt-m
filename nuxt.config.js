@@ -55,10 +55,6 @@ module.exports = {
       src: '~/plugins/vant.js'
     },
     {
-      src: '~/plugins/clipboard.js',
-      mode: 'client'
-    },
-    {
       src: '~/plugins/lib-flexible.js',
       mode: 'client'
     }

@@ -64,8 +64,8 @@ export default {
     line-height: 40px;
   }
   .block-list {
-    list-style: decimal;
-    padding: 0 0 0 18px;
+    list-style: none;
+    padding: 0;
     margin: 0;
     font-size: 16px;
     line-height: 38px;
