@@ -36,6 +36,7 @@ import dayjs from 'dayjs'
 import 'highlight.js/scss/default.scss'
 import 'github-markdown-css/github-markdown.css'
 import 'highlight.js/styles/vs2015.css'
+import Clipboard from 'clipboard'
 
 export default {
   name: 'Detail',
@@ -56,7 +57,8 @@ export default {
   },
   data() {
     return {
-      tocShow: false
+      tocShow: false,
+      clipboard: ''
     }
   },
   computed: {
@@ -81,6 +83,20 @@ export default {
     time() {
       return dayjs(this.info.articleUpdateTime).format('YYYY-MM-DD HH:mm:ss')
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.clipboard = new Clipboard('.copy-btn')
+      this.clipboard.on('success', (e) => {
+        this.$toast.success('复制成功')
+      })
+      this.clipboard.on('error', (e) => {
+        this.$toast.fail('复制成功失败')
+      })
+    })
+  },
+  destroyed() {
+    this.clipboard.destroy()
   },
   methods: {
     async addStar() {
@@ -146,6 +162,7 @@ export default {
           z-index: 10;
           background-color: #fff;
           box-shadow: -2px 2px 4px #ccc;
+          border-radius: 4px 0 0 4px;
           &.markdownIt-TOC::before {
             content: '文章目录：';
             font-weight: 700;
@@ -158,35 +175,61 @@ export default {
           background: #1e1e1e !important;
         }
         pre.hljs {
-          padding: 14px 2px;
-          border-radius: 5px;
+          padding: 18px 2px 18px 40px !important;
+          border-radius: 5px !important;
           position: relative;
-          ol {
-            list-style: decimal;
-            margin: 0;
-            margin-left: 40px;
-            padding: 0;
-            li {
-              list-style: decimal-leading-zero;
-              position: relative;
-              padding-left: 10px;
-              .line-num {
-                position: absolute;
-                left: -40px;
-                top: 0;
-                width: 40px;
-                height: 100%;
-                border-right: 1px solid rgba(0, 0, 0, 0.66);
+          font-size: 14px !important;
+          line-height: 22px !important;
+          overflow: hidden !important;
+          code {
+            display: block !important;
+            margin: 0 10px !important;
+            overflow-x: auto !important;
+          }
+          .line-numbers-rows {
+            position: absolute;
+            pointer-events: none;
+            top: 18px;
+            bottom: 18px;
+            left: 0;
+            font-size: 100%;
+            width: 40px;
+            text-align: center;
+            letter-spacing: -1px;
+            border-right: 1px solid rgba(0, 0, 0, 0.66);
+            user-select: none;
+            counter-reset: linenumber;
+            span {
+              pointer-events: none;
+              display: block;
+              counter-increment: linenumber;
+              &:before {
+                content: counter(linenumber);
+                color: #999;
+                display: block;
+                text-align: center;
               }
             }
           }
           b.name {
             position: absolute;
             top: 2px;
-            right: 12px;
+            right: 50px;
             z-index: 10;
             color: #999;
             pointer-events: none;
+          }
+          .copy-btn {
+            position: absolute;
+            padding: 0 4px;
+            top: 2px;
+            right: 4px;
+            z-index: 10;
+            color: #333;
+            cursor: pointer;
+            background-color: #fff;
+            border: 0;
+            border-radius: 2px;
           }
         }
       }

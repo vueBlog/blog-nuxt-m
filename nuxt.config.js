@@ -55,6 +55,10 @@ module.exports = {
       src: '~/plugins/vant.js'
     },
     {
+      src: '~/plugins/clipboard.js',
+      mode: 'client'
+    },
+    {
       src: '~/plugins/lib-flexible.js',
       mode: 'client'
     }
@@ -115,9 +119,17 @@ module.exports = {
   router: {
     base: '/blogNuxtM/',
     scrollBehavior(to, from, savedPosition) {
-      return {
-        x: 0,
-        y: 0
+      if (to.hash) {
+        return {
+          selector: to.hash
+        }
+      } else if (savedPosition) {
+        return savedPosition
+      } else {
+        return {
+          x: 0,
+          y: 0
+        }
       }
     }
   }
