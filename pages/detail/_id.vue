@@ -159,7 +159,9 @@ export default {
         .markdownIt-TOC {
           position: fixed;
           right: 15px;
-          z-index: 10;
+          z-index: 20;
+          max-height: 50vh;
+          overflow: auto;
           background-color: #fff;
           box-shadow: -2px 2px 4px #ccc;
           border-radius: 4px 0 0 4px;
