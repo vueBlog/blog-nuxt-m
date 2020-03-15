@@ -90,6 +90,23 @@ export default {
       }
       return res
     }
+  },
+  head() {
+    return {
+      title: `搜索 | ${process.env.VUE_APP_title}`,
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: `搜索 | ${process.env.VUE_APP_keywords}`
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: `搜索 | ${process.env.VUE_APP_description}`
+        }
+      ]
+    }
   }
 }
 </script>

@@ -10,9 +10,9 @@
         :title="item.authorName"
         value="作者详情"
         :is-link="true"
-        @click="activeAuthor = item.authorId"
+        :to="`/about?id=${item.authorId}`"
       />
-      <div v-if="activeAuthor === item.authorId" class="item-body">
+      <div v-if="activeAuthorId === item.authorId" class="item-body">
         <div class="header-img">
           <img
             class="img"
@@ -53,14 +53,45 @@ export default {
     }
   },
   data() {
-    return {
-      activeAuthor: 0
+    return {}
+  },
+  computed: {
+    activeAuthorId() {
+      return this.$route.query.id
+        ? this.$route.query.id * 1
+        : this.authorList[0].authorId
+    },
+    activeAuthor() {
+      let res = this.authorList[0]
+      for (
+        let index = 0, length = this.authorList.length;
+        index < length;
+        index++
+      ) {
+        const element = this.authorList[index]
+        if (element.authorId === this.activeAuthorId) {
+          res = element
+        }
+      }
+      return res
     }
   },
-  created() {
-    this.activeAuthor = this.$route.query.id
-      ? this.$route.query.id * 1
-      : this.authorList[0].authorId
+  head() {
+    return {
+      title: `${this.activeAuthor.authorName} | ${process.env.VUE_APP_title}`,
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: `${this.activeAuthor.authorName} | ${process.env.VUE_APP_keywords}`
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: `${this.activeAuthor.authorName} | ${process.env.VUE_APP_description}`
+        }
+      ]
+    }
   }
 }
 </script>

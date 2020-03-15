@@ -63,6 +63,23 @@ export default {
         query: { ...this.$route.query, page: this.currentPage }
       })
     }
+  },
+  head() {
+    return {
+      title: `列表 | ${process.env.VUE_APP_title}`,
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: `列表 | ${process.env.VUE_APP_keywords}`
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: `列表 | ${process.env.VUE_APP_description}`
+        }
+      ]
+    }
   }
 }
 </script>

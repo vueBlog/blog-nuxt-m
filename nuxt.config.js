@@ -115,11 +115,7 @@ module.exports = {
   router: {
     base: process.env.VUE_APP_router_base,
     scrollBehavior(to, from, savedPosition) {
-      if (to.hash) {
-        return {
-          selector: to.hash
-        }
-      } else if (savedPosition) {
+      if (savedPosition) {
         return savedPosition
       } else {
         return {

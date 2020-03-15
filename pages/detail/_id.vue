@@ -1,5 +1,13 @@
 <template>
   <div class="content">
+    <div id="top"></div>
+    <van-cell
+      title="上篇"
+      :value="prevInfo.articleTitle"
+      :is-link="true"
+      :to="`/detail/${prevInfo.articleId}`"
+      class="custome-cell"
+    />
     <div class="detail-box">
       <h2 class="detail-title van-ellipsis">
         <van-tag type="primary" class="tag">{{ articleType }}</van-tag
@@ -28,6 +36,16 @@
         v-html="handleDetail"
       ></div>
     </div>
+    <van-cell
+      title="下篇"
+      :value="nextInfo.articleTitle"
+      :is-link="true"
+      :to="`/detail/${nextInfo.articleId}`"
+      class="custome-cell"
+    />
+    <a :href="toTopUrl" class="to-top">
+      <van-icon name="upgrade" />
+    </a>
   </div>
 </template>
 
@@ -100,12 +118,17 @@ export default {
             const html = `<a href="${element[1]}" target="_blank">${element[2]}${svg}</a>`
             res = res.replace(element[0], html)
           } else {
-            const html = `<a href="${process.env.VUE_APP_router_base}${this.$route.path}${element[1]}">${element[2]}</a>`
+            const html = `<a href="${process.env.VUE_APP_router_base}${
+              this.$route.path
+            }#${decodeURI(element[1].slice(1))}">${element[2]}</a>`
             res = res.replace(element[0], html)
           }
         }
       }
       return res
+    },
+    toTopUrl() {
+      return `${process.env.VUE_APP_router_base}${this.$route.path}#top`
     }
   },
   mounted() {
@@ -132,11 +155,50 @@ export default {
         this.info.articleStart = result.data.articleStart
       }
     }
+  },
+  head() {
+    return {
+      title: `${this.info.articleTitle} | ${process.env.VUE_APP_title}`,
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: `${this.info.articleTitle} | ${process.env.VUE_APP_keywords}`
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: `${this.info.articleTitle} | ${process.env.VUE_APP_description}`
+        }
+      ]
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.custome-cell {
+  /deep/ {
+    .van-cell__title {
+      flex: 0 0 40px;
+      span {
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    .van-cell__value {
+      flex: auto;
+      span {
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}
 .detail-box {
   margin: 15px 0;
   padding: 0 15px;
@@ -163,7 +225,7 @@ export default {
     height: 30px;
     font-size: 14px;
     padding: 0 8px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #dedede;
     border-right: 0;
     border-radius: 15px 0 0 15px;
@@ -283,5 +345,19 @@ export default {
       }
     }
   }
+}
+.to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 65px;
+  z-index: 1100;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #dedede;
+  border-radius: 20px;
 }
 </style>

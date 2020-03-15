@@ -30,6 +30,23 @@ export default {
   },
   data() {
     return {}
+  },
+  head() {
+    return {
+      title: `首页 | ${process.env.VUE_APP_title}`,
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: `首页 | ${process.env.VUE_APP_keywords}`
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: `首页 | ${process.env.VUE_APP_description}`
+        }
+      ]
+    }
   }
 }
 </script>
