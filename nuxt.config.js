@@ -113,7 +113,7 @@ module.exports = {
     }
   },
   router: {
-    base: '/blogNuxtM/',
+    base: process.env.VUE_APP_router_base,
     scrollBehavior(to, from, savedPosition) {
       if (to.hash) {
         return {

@@ -25,7 +25,7 @@
       <div
         :class="{ 'no-toc': !tocShow }"
         class="detail-article markdown-body"
-        v-html="info.articleContentHtml"
+        v-html="handleDetail"
       ></div>
     </div>
   </div>
@@ -82,6 +82,28 @@ export default {
     },
     time() {
       return dayjs(this.info.articleUpdateTime).format('YYYY-MM-DD HH:mm:ss')
+    },
+    handleDetail() {
+      let res = this.info.articleContentHtml
+      const aReg = /<a.*href="(.*)">(.*?)<\/a>/gi
+      let regArray
+      const aArray = []
+      while ((regArray = aReg.exec(res)) !== null) {
+        aArray.push(regArray)
+      }
+      for (let index = 0, length = aArray.length; index < length; index++) {
+        const element = aArray[index]
+        if (element && element.length === 3) {
+          if (element[1].indexOf('http') === 0) {
+            const html = `<a href="${element[1]}" target="_blank">${element[2]}</a>`
+            res = res.replace(element[0], html)
+          } else {
+            const html = `<a href="${process.env.VUE_APP_router_base}${this.$route.path}${element[1]}">${element[2]}</a>`
+            res = res.replace(element[0], html)
+          }
+        }
+      }
+      return res
     }
   },
   mounted() {
@@ -150,6 +172,15 @@ export default {
     font-size: 16px;
     &.markdown-body {
       /deep/ {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          margin: -30px 0 0;
+          padding: 45px 0 15px;
+        }
         ol {
           list-style: decimal;
         }
@@ -160,17 +191,23 @@ export default {
           position: fixed;
           right: 15px;
           z-index: 20;
+          padding-bottom: 10px;
           max-height: 50vh;
           overflow: auto;
           background-color: #fff;
           box-shadow: -2px 2px 4px #ccc;
           border-radius: 4px 0 0 4px;
           &.markdownIt-TOC::before {
+            position: sticky;
+            top: 0;
+            display: block;
+            padding-top: 10px;
             content: '文章目录：';
             font-weight: 700;
             color: currentColor;
             margin-left: -1.5em;
             line-height: 26px;
+            background-color: #fff;
           }
         }
         pre {

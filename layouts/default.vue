@@ -3,6 +3,7 @@
     <van-nav-bar
       :title="title"
       fixed
+      :z-index="1000"
       @click-left="clickNavLeft"
       @click-right="clickNavRight"
     >
@@ -26,6 +27,7 @@
         :key="item.name"
         :to="item.to"
         :icon="$route.path === item.to ? item.selectedIcon : item.icon"
+        :z-index="1000"
         >{{ item.label }}</van-tabbar-item
       >
     </van-tabbar>
@@ -91,7 +93,19 @@ export default {
   watch: {
     $route: {
       handler(val, oldVal) {
-        if (val.name === 'detail-id') {
+        let flag = false
+        for (
+          let index = 0, length = this.tabbar.length;
+          index < length;
+          index++
+        ) {
+          const element = this.tabbar[index]
+          if (element.name === 'detail-id') {
+            flag = true
+            break
+          }
+        }
+        if (!flag && val.name === 'detail-id') {
           this.tabbar.push({
             name: 'detail-id',
             icon: 'label-o',
@@ -99,11 +113,8 @@ export default {
             to: val.path,
             label: '详情'
           })
-        } else {
-          // eslint-disable-next-line no-lonely-if
-          if (this.tabbar.length === 5) {
-            this.tabbar.splice(4, 1)
-          }
+        } else if (flag && val.name !== 'detail-id') {
+          this.tabbar.splice(4, 1)
         }
       },
       deep: true,
