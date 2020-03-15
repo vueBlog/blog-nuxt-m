@@ -21,13 +21,12 @@
       </div>
     </van-nav-bar>
     <nuxt />
-    <van-tabbar route :safe-area-inset-bottom="true">
+    <van-tabbar route :safe-area-inset-bottom="true" :z-index="1000">
       <van-tabbar-item
         v-for="item in tabbar"
         :key="item.name"
         :to="item.to"
         :icon="$route.path === item.to ? item.selectedIcon : item.icon"
-        :z-index="1000"
         >{{ item.label }}</van-tabbar-item
       >
     </van-tabbar>
