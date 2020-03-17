@@ -104,16 +104,29 @@ export default {
             break
           }
         }
-        if (!flag && val.name === 'detail-id') {
-          this.tabbar.push({
-            name: 'detail-id',
-            icon: 'label-o',
-            selectedIcon: 'label',
-            to: val.path,
-            label: '详情'
-          })
-        } else if (flag && val.name !== 'detail-id') {
-          this.tabbar.splice(4, 1)
+        if (val.name !== 'detail-id') {
+          if (flag) {
+            this.tabbar.splice(4, 1)
+          }
+        } else {
+          // eslint-disable-next-line no-lonely-if
+          if (flag) {
+            this.tabbar.splice(4, 1, {
+              name: 'detail-id',
+              icon: 'label-o',
+              selectedIcon: 'label',
+              to: val.path,
+              label: '详情'
+            })
+          } else {
+            this.tabbar.push({
+              name: 'detail-id',
+              icon: 'label-o',
+              selectedIcon: 'label',
+              to: val.path,
+              label: '详情'
+            })
+          }
         }
       },
       deep: true,
