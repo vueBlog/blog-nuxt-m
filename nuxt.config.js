@@ -31,7 +31,13 @@ module.exports = {
         content: process.env.VUE_APP_author || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: `${process.env.VUE_APP_router_base}/favicon.ico`
+      }
+    ]
   },
   server: {
     port: 9000 // default: 3000
