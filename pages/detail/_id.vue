@@ -54,7 +54,6 @@ import dayjs from 'dayjs'
 import 'highlight.js/scss/default.scss'
 import 'github-markdown-css/github-markdown.css'
 import 'highlight.js/styles/vs2015.css'
-import Clipboard from 'clipboard'
 
 export default {
   name: 'Detail',
@@ -133,7 +132,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.clipboard = new Clipboard('.copy-btn')
+      this.clipboard = new this.Clipboard('.copy-btn')
       this.clipboard.on('success', (e) => {
         this.$toast.success('复制成功')
       })

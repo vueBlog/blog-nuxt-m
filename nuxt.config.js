@@ -57,6 +57,10 @@ module.exports = {
     {
       src: '~/plugins/lib-flexible.js',
       mode: 'client'
+    },
+    {
+      src: '~/plugins/clipboard.js',
+      mode: 'client'
     }
   ],
   /*
