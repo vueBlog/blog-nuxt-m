@@ -37,6 +37,13 @@ module.exports = {
         type: 'image/x-icon',
         href: `${process.env.VUE_APP_router_base}/favicon.ico`
       }
+    ],
+    script: [
+      {
+        src: 'https://zz.bdstatic.com/linksubmit/push.js',
+        async: true,
+        defer: true
+      }
     ]
   },
   server: {
