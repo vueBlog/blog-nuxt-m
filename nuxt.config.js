@@ -74,6 +74,10 @@ module.exports = {
     {
       src: '~/plugins/clipboard.js',
       mode: 'client'
+    },
+    {
+      src: '~/plugins/routerAfterEach.js',
+      mode: 'client'
     }
   ],
   /*
