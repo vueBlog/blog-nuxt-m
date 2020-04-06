@@ -241,8 +241,8 @@ export default {
         h4,
         h5,
         h6 {
-          margin: -30px 0 0;
-          padding: 45px 0 15px;
+          margin: -40px 0 8px;
+          padding: 45px 0 8px;
         }
         ol {
           list-style: decimal;
