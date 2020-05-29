@@ -20,3 +20,9 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## git 提交
+
+`npm run commit` 
+
+说明文档：[git commit 规范](https://mp.weixin.qq.com/s/8oWsj_ipp73crD_vg58LeQ)
