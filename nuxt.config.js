@@ -47,7 +47,7 @@ module.exports = {
     ]
   },
   server: {
-    port: 9000 // default: 3000
+    port: 8088 // default: 3000
   },
   /*
    ** Customize the progress-bar color
