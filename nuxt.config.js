@@ -68,6 +68,10 @@ module.exports = {
       src: '~/plugins/vant.js'
     },
     {
+      src: '~/plugins/toPC.js',
+      mode: 'client'
+    },
+    {
       src: '~/plugins/lib-flexible.js',
       mode: 'client'
     },
