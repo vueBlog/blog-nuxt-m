@@ -29,9 +29,11 @@ window.OS = (function() {
   }
 })()
 if (!window.OS.phone && !window.OS.ipad) {
-  const url = `${location.origin}${location.pathname.replace(
-    '/blogNuxtM',
-    '/vue-blog'
-  )}${location.search}${location.hash}`
-  location.href = url
+  if (process.env.NODE_ENV === 'production') {
+    const url = `${location.origin}${location.pathname.replace(
+      '/blogNuxtM',
+      '/vue-blog'
+    )}${location.search}${location.hash}`
+    location.href = url
+  }
 }

@@ -65,7 +65,8 @@ module.exports = {
       src: '~/plugins/axios.js'
     },
     {
-      src: '~/plugins/vant.js'
+      src: '~/plugins/vant.js',
+      mode: 'client'
     },
     {
       src: '~/plugins/toPC.js',
