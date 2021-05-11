@@ -21,13 +21,14 @@
       </div>
       <div class="flex row">
         <span>views: {{ info.articleView }}</span>
-        <van-button plain type="info" size="small" @click="addStar"
-          >star: {{ info.articleStart }}</van-button
-        >
+        <client-only>
+          <van-button plain type="info" size="small" @click="addStar"
+            >star: {{ info.articleStart }}</van-button
+          >
+        </client-only>
       </div>
       <div class="toc-btn flex" @click="tocShow = !tocShow">
-        <van-icon v-if="!tocShow" name="arrow-left" />
-        <van-icon v-else name="arrow" />
+        <van-icon :name="`${tocShow ? 'arrow' : 'arrow-left'}`" />
         <span>目录</span>
       </div>
       <div

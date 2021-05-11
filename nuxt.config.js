@@ -65,8 +65,7 @@ module.exports = {
       src: '~/plugins/axios.js'
     },
     {
-      src: '~/plugins/vant.js',
-      mode: 'client'
+      src: '~/plugins/vant.js'
     },
     {
       src: '~/plugins/toPC.js',
@@ -149,6 +148,11 @@ module.exports = {
           y: 0
         }
       }
+    }
+  },
+  generate: {
+    minify: {
+      collapseWhitespace: false
     }
   }
 }

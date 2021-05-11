@@ -5,5 +5,6 @@ export default ({ app, store }) => {
       to: to.fullPath,
       client: 2
     })
+    console.log(process.env.VUE_APP_router_base)
   })
 }
