@@ -99,7 +99,9 @@ export default {
       return result
     },
     time() {
-      return dayjs(this.info.articleUpdateTime).format('YYYY-MM-DD HH:mm:ss')
+      return this.info.articleUpdateTime
+        ? dayjs(this.info.articleUpdateTime).format('YYYY-MM-DD HH:mm:ss')
+        : dayjs(this.info.articleCreateTime).format('YYYY-MM-DD HH:mm:ss')
     },
     handleDetail() {
       let res = this.info.articleContentHtml
