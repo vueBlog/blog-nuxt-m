@@ -32,7 +32,7 @@ if (!window.OS.phone && !window.OS.ipad) {
   if (process.env.NODE_ENV === 'production') {
     const url = `${location.origin}${location.pathname.replace(
       '/blogNuxtM',
-      '/vue-blog'
+      '/blogNuxt'
     )}${location.search}${location.hash}`
     location.href = url
   }
